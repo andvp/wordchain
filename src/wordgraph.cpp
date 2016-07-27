@@ -5,7 +5,7 @@ WordGraph::WordGraph(const set<string>& dictionary) {
 	for(const string& word : dictionary) {
 		set<WordTemplate> wordTemplates = getWordTemplates(word);
 		for(const WordTemplate& wordTemplate : wordTemplates) {
-			_searchMap[wordTemplate].insert(word);
+			_wordsForTemplate[wordTemplate].insert(word);
 		}
 	}
 }
@@ -15,7 +15,7 @@ set<string> WordGraph::getNeighbours(const string& word) const {
 	if (!_dictionary.count(word)) return allNeighbours;
 	set<WordTemplate> wordTemplates = getWordTemplates(word);
 	for(const WordTemplate& wordTemplate : wordTemplates) {
-		const set<string>& neighbours = _searchMap.at(wordTemplate);
+		const set<string>& neighbours = _wordsForTemplate.at(wordTemplate);
 		allNeighbours.insert(neighbours.begin(), neighbours.end());
 	}
 	allNeighbours.erase(word);

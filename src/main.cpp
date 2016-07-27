@@ -8,12 +8,20 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 	try {
-		TextFileReader wordsReader(argv[1]), dictionaryReader(argv[2]);
+		// Read start & end words
+		TextFileReader wordsReader(argv[1]);
 		list<string> words = wordsReader.readLines();
-		list<string> dictionary = dictionaryReader.readLines();
-		WordChain wordChain(set<string>(dictionary.begin(), dictionary.end()));
 		words.resize(2);
+
+		// Read dictionary
+		TextFileReader dictionaryReader(argv[2]);
+		list<string> dictionary = dictionaryReader.readLines();
+
+		// Find chain
+		WordChain wordChain(set<string>(dictionary.begin(), dictionary.end()));
 		list<string> chain = wordChain.getChain(words.front(), words.back());
+
+		// Print result
 		if (chain.empty()) {
 			cout << "Chain was not found" << endl;
 		} else {

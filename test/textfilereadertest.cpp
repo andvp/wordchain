@@ -2,12 +2,19 @@
 #include "gtest/gtest.h"
 #include "textfilereader.h"
 
+/*
+ Failure test for TextFileReader.readLines() method when supplied file is missing.
+ */
 TEST(TextFileReaderTest, MissingFile)
 {
 	TextFileReader reader("missing.txt");
 	ASSERT_THROW(reader.readLines(), TextFileReaderException);
 }
 
+/*
+ Accuracy test for TextFileReader.readLines() method.
+ It should properly read all lines of supplied test file.
+ */
 TEST(TextFileReaderTest, ReadLinesTest)
 {
 	TextFileReader reader("test.txt");
